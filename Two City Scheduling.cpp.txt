@@ -1,0 +1,43 @@
+class Solution {        
+public:
+    bool static cmp(vector<int> A,vector<int> B)
+    {
+        if(abs(A[0]-A[1]) > abs(B[0]-B[1]))
+            return true;
+        return false;
+    }
+    int twoCitySchedCost(vector<vector<int>>& costs) {
+        int counta=0,countb=0;
+        sort(costs.begin(),costs.end(),cmp);
+        int i=0;
+        int n=costs.size();
+        int each=n/2;
+        int sum=0;
+        for(;i<n && counta<each && countb<each;i++)
+        {
+            if(costs[i][0]<=costs[i][1])
+            {
+                sum+=costs[i][0];
+                counta++;
+            }
+            else
+            {
+                sum+=costs[i][1];
+                countb++;
+            }
+        }
+        while(counta<each)
+        {
+             sum+=costs[i][0];
+                counta++;
+            i++;
+        }
+        while(countb<each)
+        {
+             sum+=costs[i][1];
+                countb++;
+            i++;
+        }
+        return sum;        
+    }
+};
